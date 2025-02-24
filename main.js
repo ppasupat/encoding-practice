@@ -41,7 +41,7 @@ $(function () {
   // ################################
   // Main menu and Quiz
 
-  let currentQId = 0, currentQType = null, targetAnswer = null;
+  let score = 0, misses = 0, qtype = null, goldAns = null;
 
   function setupMenu() {
     // TODO: Populate the options
@@ -51,13 +51,12 @@ $(function () {
   $('#start-button').click(setupQuiz);
 
   function setupQuiz() {
-    currentQId = 0;
+    score = 0;
     nextQuestion();
     showScene('quiz');
   }
 
   function nextQuestion() {
-    currentQId++;
     // TODO: Generate the next question and show it. Also set currentQType and targetAnswer.
   }
 

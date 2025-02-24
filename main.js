@@ -7,7 +7,6 @@ $(function () {
   // Utilities
 
   function showScene(name, callback) {
-    console.log(name);
     $('.scene').hide();
     $('#scene-' + name).show();
     if (callback !== void 0) callback();

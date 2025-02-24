@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="questions.js"></script>
   <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
@@ -17,23 +18,21 @@
       <div id=scene-menu class=scene>
         <div id=pane-title>Encoding Practice</div>
         <div id=pane-options></div>
-        <div id=start-button class="btn">START</div>
+        <div id=pane-start class=centerize>
+          <div id=start-button class="btn">START</div>
+        </div>
       </div>
       <div id=scene-quiz class=scene>
         <div id=pane-hud>
           <div id=hud-qid>0</div>
           <div id=hud-qtype>QUESTION TYPE</div>
-          <div id=hud-menu class=btn>Menu</div>
+          <div id=hud-menu class=btn>MENU</div>
         </div>
         <div id=pane-screen>
           <div id=screen></div>
         </div>
         <div id=pane-hint></div>
         <div id=pane-keyboard>
-          <div id=meta-keys>
-            <div class="btn key btn-red" id="key-bksp">&lt;</div>
-            <div class="btn key btn-green" id="key-submit">OK</div>
-          </div>
           <div id=keyboard-english class=keyboard>
             <div class=key-row>
               <div class="btn key alph">A</div>
@@ -68,6 +67,8 @@
               <div class="btn key alph">X</div>
               <div class="btn key alph">Y</div>
               <div class="btn key alph">Z</div>
+              <div class="btn key btn-red" id="key-bksp">&lt;</div>
+              <div class="btn key btn-green" id="key-submit">OK</div>
             </div>
           </div>
         </div>

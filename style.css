@@ -175,7 +175,7 @@ div.scene, div.cover {
 
 #pane-screen {
   position: absolute;
-  background: brown;
+  background: #98c;
   left: 15px; right: 15px;
   top: 75px; height: 345px;
 }
@@ -185,6 +185,22 @@ div.scene, div.cover {
   background: white;
   left: 10px; right: 10px;
   top: 10px; bottom: 10px;
+}
+
+#screen .bigline {
+  margin: 20px;
+  font-size: 200%;
+}
+#screen #answer {
+  margin: 20px;
+  padding: 10px;
+  font-size: 200%;
+  height: 5ex;
+  width: 90%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #pane-keyboard {

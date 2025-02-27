@@ -73,8 +73,12 @@ $(function () {
   function nextQuestion() {
     qtype = QTYPES[Math.floor(Math.random() * QTYPES.length)];
     $('#hud-qtype').text(qtype.name);
-    $('#screen').empty();
-    goldAnswer = qtype.genQuestion();
+    let newGoldAnswer;
+    do {
+      $('#screen').empty();
+      newGoldAnswer = qtype.genQuestion();
+    } while (newGoldAnswer === goldAnswer);
+    goldAnswer = newGoldAnswer;
     checkKeys();
   }
 

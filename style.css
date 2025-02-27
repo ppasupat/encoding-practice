@@ -151,13 +151,19 @@ div.scene, div.cover {
 }
 #hud-score {
   display: inline-block;
-  width: 40px;
+  width: 45px;
   text-align: center;
 }
 #hud-misses {
   display: inline-block;
-  width: 40px;
+  width: 45px;
   text-align: center;
+}
+#hud-score.flashing {
+  color: #0B0;
+}
+#hud-misses.flashing {
+  color: #C00;
 }
 .hud-label {
   font-size: 50%;

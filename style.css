@@ -8,45 +8,26 @@
   box-sizing: border-box;
   font-family: 'Roboto Mono', monospace;
   user-select: none;
+  color: #202122;
 }
 
-.centerize, .answer-letter, .btn {
+.centerize {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.btn {
-  box-sizing: content-box;
-  border-radius: 10px;
-  color: white;
-  text-align: center;
-  border-bottom: 5px solid #17B;
-  background-color: #39D;
+button {
+  font-size: 1.5rem;
+  padding: .5rem 1.5rem;
+  background: #eee;
 }
-.btn:active {
-  transform: translate(0, 5px);
-  border-bottom: none;
+button:hover {
+  background: #ddd;
 }
-.btn.btn-bottom:active {
-  transform: none;
-}
-.btn.xxx {
-  background-color: #DDD !important;
-  border-color: #BBB !important;
-}
-.btn.xxx:active {
-  transform: none !important;
-  border-bottom: 5px solid #BBB !important;
-}
-.btn.btn-red {
-  background-color: #C33;
-  border-bottom-color: #A11;
-}
-.btn.btn-green {
-  background-color: #3C3;
-  border-bottom-color: #1A1;
+button:active {
+  background: #ddd;
 }
 
 html {
@@ -56,10 +37,7 @@ html {
 
 body {
   height: 100%;
-  background-color: #112;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #fafaff;
   font-size: 24px;
 }
 
@@ -75,11 +53,13 @@ body {
 /* scenes */
 
 div.scene, div.cover {
-  display: none;
   position: absolute;
   width: 500px;
   height: 700px;
   left: 0; top: 0;
+}
+div.scene.hidden, div.cover.hidden {
+  display: none;
 }
 
 @keyframes fade {
@@ -87,134 +67,50 @@ div.scene, div.cover {
   to { opacity: 1; }
 }
 #scene-menu, #scene-quiz {
-  animation: fade 500ms;
+  animation: fade 300ms;
 }
 
 /* ################################ */
-/* preload scene */
+/* menu */
 
-#scene-preload {
+h1 {
+  font-size: 3rem;
+  margin: 3rem 0;
+}
+
+/* ################################ */
+/* quiz */
+
+#hud {
+  position: absolute;
+  top: 15px; left: 15px; right: 15px; height: 40px;
+}
+#score {
+  display: inline-block;
+  width: 45px;
+  text-align: center;
+  background: black;
   color: white;
+  line-height: 40px;
 }
-
-#scene-preload > div {
-  height: 100%;
-}
-
-#pane-loading {
-  font-size: 30px;
-  text-align: center;
-}
-
-/* ################################ */
-/* menu scene */
-
-#scene-menu {
-  background-color: #f4eeff;
-}
-
-#pane-title {
-  position: absolute;
-  top: 40px; left: 10px; right: 10px;
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-}
-
-#pane-start {
-  position: absolute;
-  top: 600px; left: 10px; right: 10px;
-}
-
-#start-button {
-  width: 200px;
-  height: 60px;
-  font-size: 32px;
-}
-
-/* ################################ */
-/* quiz scene */
-
-#scene-quiz {
-  background-color: #f4eeff;
-}
-
-#pane-hud {
-  position: absolute;
-  left: 15px; right: 15px;
-  top: 15px; height: 50px;
-}
-#hud-menu {
-  position: absolute;
-  right: 0; width: 80px;
-  top: 0; height: 45px;
-}
-#hud-score {
+#qtype {
   display: inline-block;
-  width: 45px;
-  text-align: center;
+  line-height: 40px;
 }
-#hud-misses {
-  display: inline-block;
-  width: 45px;
-  text-align: center;
-}
-#hud-score.flashing {
-  color: #0B0;
-}
-#hud-misses.flashing {
-  color: #C00;
-}
-.hud-label {
-  font-size: 50%;
-}
-#hud-qtype {
-  display: inline-block;
-  margin-left: 10px;
-}
-
-#pane-screen {
+#menu-button {
   position: absolute;
-  background: #98c;
-  left: 15px; right: 15px;
-  top: 75px; height: 345px;
+  top: 0; right: 0;
+  padding: .2rem 1rem;
 }
 
 #screen {
   position: absolute;
-  background: white;
-  left: 10px; right: 10px;
-  top: 10px; bottom: 10px;
-}
-
-#screen .bigline {
-  margin: 20px;
-  font-size: 200%;
-}
-#screen #answer {
-  margin: 20px;
-  padding: 10px;
-  font-size: 200%;
-  height: 5ex;
-  width: 90%;
-  background-color: #eee;
+  top: 75px; left: 15px; right: 15px; bottom: 15px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
-#pane-keyboard {
-  position: absolute;
-  left: 10px; right: 10px;
-  top: 430px;
-  text-align: center;
-}
-.key-row {
-  display: flex;
-  justify-content: space-between;
-}
-.key {
-  margin: 2px 2px;
-  width: 64px; height: 55px;
-  font-size: 36px;
+#screen .beeg {
+  font-size: 4rem;
 }

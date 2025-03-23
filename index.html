@@ -1,41 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Encoding Practice</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="main.js"></script>
-</head>
-<body class=centerize>
-  <div id=game-wrapper>
-    <div id=game>
-      <div id=scene-menu class="scene centerize hidden">
-        <h1>Encoding Practice</h1>
-        <button type=button id=start-button>START</button>
-      </div>
-      <div id=scene-quiz class="scene hidden">
-        <div id=hud>
-          <div id=score>0</div>
-          <div id=qtype>QUESTION TYPE</div>
-          <button type=button id=menu-button>≡</button>
-        </div>
-        <div id=screen></div>
-      </div>
-      <div id=scene-preload class="scene centerize">
-        <div id=loading-message>Loading ...</div>
-      </div>
-      <div id=cover-correct class="cover centerize hidden">
-        Correct!
-      </div>
-      <div id=cover-incorrect class="cover centerize hidden">
-        Incorrect!
-      </div>
-    </div>
-  </div>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>Encoding Practice</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

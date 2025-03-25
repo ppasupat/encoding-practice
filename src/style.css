@@ -6,6 +6,71 @@
   user-select: none;
 }
 
-*, button {
+html, button {
   font-family: 'Roboto Mono', monospace;
+}
+
+/* ################################ */
+/* scene */
+
+html {
+  height: 100%;
+  touch-action: manipulation;
+  font-size: 30px;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background: #fafaff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  position: relative;
+  width: 500px;
+  height: 700px;
+  overflow: hidden;
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+article {
+  flex-grow: 1;
+}
+
+/* ################################ */
+/* question */
+
+#question-type, #answer-type {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+#question, #answer {
+  font-size: 1.2rem;
+}
+
+/* ################################ */
+/* keyboard */
+
+footer button {
+  font-size: 1rem;
+}
+
+.keyboard button {
+  width: 2rem;
+  height: 2rem;
+}
+
+.special-buttons button {
+  height: 2rem;
+  padding: 0 15px;
 }

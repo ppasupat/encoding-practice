@@ -35,16 +35,18 @@ export default function App() {
         <span id="score-display">{score}</span>
       </header>
       <article>
-        <p id="question-type">{question.questionType}</p>
-        <p id="question">{question.question}</p>
-        <p id="answer-type">{question.answerType}</p>
-        <p id="answer">{answer}</p>
-        <Keyboard handleKey={handleKey} />
+        <div id="question-type">{question.questionType}</div>
+        <div id="question">{question.question}</div>
+        <div id="answer-type">{question.answerType}</div>
+        <div id="answer">{answer}</div>
       </article>
       <footer>
-        <button onClick={handleClear}>Clear</button>
-        <button onClick={handleBackspace}>Backspace</button>
-        <button onClick={handleSubmit}>Submit</button>
+        <Keyboard handleKey={handleKey} />
+        <div className="special-buttons">
+          <button onClick={handleClear}>Clear</button>
+          <button onClick={handleBackspace}>Backspace</button>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
       </footer>
     </>
   );

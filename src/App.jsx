@@ -59,8 +59,10 @@ export default function App() {
       <footer>
         <Keyboard type={question.answerType} handleKey={handleKey} />
         <div className="special-buttons">
-          <button onClick={handleClear}>Clear</button>
-          <button onClick={handleBackspace}>Backspace</button>
+          {question.useKeyboard && <>
+            <button onClick={handleClear}>Clear</button>
+            <button onClick={handleBackspace}>Backspace</button>
+          </>}
           <button onClick={handleSubmit}>Submit</button>
         </div>
       </footer>

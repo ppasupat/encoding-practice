@@ -7,6 +7,7 @@ const ENC_ALPHABET = {
   name: 'alphabet',
   mapping: Object.fromEntries(ALPHABETS.map(x => [x, x])),
   sep: '',
+  useKeyboard: true,
 };
 
 const ENC_INDEX = {
@@ -14,6 +15,7 @@ const ENC_INDEX = {
   mapping: Object.fromEntries(
     ALPHABETS.map(x => [x, (x.codePointAt(0) - 64).toString(10)])),
   sep: '|',
+  useKeyboard: true,
 };
 
 const ENC_BINARY = {
@@ -21,6 +23,7 @@ const ENC_BINARY = {
   mapping: Object.fromEntries(
     ALPHABETS.map(x => [x, (x.codePointAt(0) - 64).toString(2)])),
   sep: '|',
+  useKeyboard: true,
 };
 
 const ENC_TERNARY = {
@@ -28,6 +31,7 @@ const ENC_TERNARY = {
   mapping: Object.fromEntries(
     ALPHABETS.map(x => [x, (x.codePointAt(0) - 64).toString(3)])),
   sep: '|',
+  useKeyboard: true,
 };
 
 const ENC_MORSE = {
@@ -42,6 +46,7 @@ const ENC_MORSE = {
     Y: '-.--', Z: '--..',
   },
   sep: '|',
+  useKeyboard: true,
 }
 
 const ENC_BRAILLE = {
@@ -51,25 +56,26 @@ const ENC_BRAILLE = {
     F: '⠋', G: '⠛', H: '⠓', I: '⠊', J: '⠚',
     K: '⠅', L: '⠇', M: '⠍', N: '⠝', O: '⠕',
     P: '⠏', Q: '⠟', R: '⠗', S: '⠎', T: '⠞',
-    U: '⠥', V: '⠧', W: '⠺', X: '⠭', Y: '⠽', Z: '⠵',
+    U: '⠥', V: '⠧', X: '⠭', Y: '⠽', Z: '⠵',
+    W: '⠺',
   },
   sep: '',
+  useKeyboard: false,
 }
 
-/*  1   8
-    2  16  ==>  2 1+8 16
-    4  32       4     32
-   64 128      64    128
-*/
 const ENC_SEMAPHORE = {
   name: 'semaphore',
   mapping: {
-    A: '⡀', B: '⠄', C: '⠂', D: '⠉', E: '⠐', F: '⠠', G: '⢀',
-    H: '⡄', I: '⡂', J: '⠩', K: '⡉', L: '⡐', M: '⡠', N: '⣀',
-    O: '⠆', P: '⠍', Q: '⠔', R: '⠤', S: '⢄',
-    T: '⠋', U: '⠒', V: '⢉', W: '⠰', X: '⢐', Y: '⠢', Z: '⢠',
+    A: '01', B: '02', C: '03', D: '04', E: '05', F: '06', G: '07',
+    H: '12', I: '13', K: '14', L: '15', M: '16', N: '17',
+    O: '23', P: '24', Q: '25', R: '26', S: '27',
+    T: '34', U: '35', Y: '36', /*cancel*/
+    /*num*/  J: '46', V: '47',
+    W: '56', X: '57',
+    Z: '67',
   },
   sep: '',
+  useKeyboard: false,
 }
 
 function applyEncoding(word, encoding) {
@@ -110,5 +116,6 @@ export function generateQuestion() {
     answerType: qp.answer.name,
     question: applyEncoding(word, qp.question),
     goldAnswer: applyEncoding(word, qp.answer),
+    useKeyboard: qp.answer.useKeyboard,
   };
 }

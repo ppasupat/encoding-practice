@@ -7,6 +7,22 @@ export default function App() {
   const [question, setQuestion] = useState(generateQuestion);
   const [answer, setAnswer] = useState('');
 
+  function renderQuestion() {
+    return (
+      <>
+        {question.question}
+      </>
+    );
+  }
+
+  function renderAnswer() {
+    return (
+      <>
+        {answer}
+      </>
+    );
+  }
+
   function handleKey(key) {
     setAnswer(a => a + key);
   }
@@ -36,12 +52,12 @@ export default function App() {
       </header>
       <article>
         <div id="question-type">{question.questionType}</div>
-        <div id="question">{question.question}</div>
+        <div id="question">{renderQuestion(question.question)}</div>
         <div id="answer-type">{question.answerType}</div>
-        <div id="answer">{answer}</div>
+        <div id="answer">{renderAnswer(answer)}</div>
       </article>
       <footer>
-        <Keyboard handleKey={handleKey} />
+        <Keyboard type={question.answerType} handleKey={handleKey} />
         <div className="special-buttons">
           <button onClick={handleClear}>Clear</button>
           <button onClick={handleBackspace}>Backspace</button>

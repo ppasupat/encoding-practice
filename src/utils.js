@@ -1,4 +1,15 @@
 // ################################
+// Generic helpers
+
+export function choice(stuff) {
+  return stuff[Math.floor(Math.random() * stuff.length)];
+}
+
+export function replaceAt(string, index, newChar) {
+  return string.slice(0, index) + newChar + string.slice(index + 1);
+}
+
+// ################################
 // Encodings
 
 const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -6,6 +17,7 @@ const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const ENC_ALPHABET = {
   name: 'alphabet',
   mapping: Object.fromEntries(ALPHABETS.map(x => [x, x])),
+  empty: '',
   sep: '',
   useKeyboard: true,
 };
@@ -14,6 +26,7 @@ const ENC_INDEX = {
   name: 'index',
   mapping: Object.fromEntries(
     ALPHABETS.map(x => [x, (x.codePointAt(0) - 64).toString(10)])),
+  empty: '',
   sep: '|',
   useKeyboard: true,
 };
@@ -22,6 +35,7 @@ const ENC_BINARY = {
   name: 'binary',
   mapping: Object.fromEntries(
     ALPHABETS.map(x => [x, (x.codePointAt(0) - 64).toString(2)])),
+  empty: '',
   sep: '|',
   useKeyboard: true,
 };
@@ -30,6 +44,7 @@ const ENC_TERNARY = {
   name: 'ternary',
   mapping: Object.fromEntries(
     ALPHABETS.map(x => [x, (x.codePointAt(0) - 64).toString(3)])),
+  empty: '',
   sep: '|',
   useKeyboard: true,
 };
@@ -45,6 +60,7 @@ const ENC_MORSE = {
     U: '..-', V: '...-', W: '.--', X: '-..-',
     Y: '-.--', Z: '--..',
   },
+  empty: '',
   sep: '|',
   useKeyboard: true,
 }
@@ -59,6 +75,7 @@ const ENC_BRAILLE = {
     U: '⠥', V: '⠧', X: '⠭', Y: '⠽', Z: '⠵',
     W: '⠺',
   },
+  empty: '⠀',  // Braille blank
   sep: '',
   useKeyboard: false,
 }
@@ -74,6 +91,7 @@ const ENC_SEMAPHORE = {
     W: '56', X: '57',
     Z: '67',
   },
+  empty: '00',
   sep: '',
   useKeyboard: false,
 }
@@ -85,12 +103,8 @@ function applyEncoding(word, encoding) {
 // ################################
 // Generate random question
 
-function choice(stuff) {
-  return stuff[Math.floor(Math.random() * stuff.length)];
-}
-
 function getRandomWord() {
-  return new Array(3).fill(0).map(() => choice(ALPHABETS));
+  return Array(3).fill(0).map(() => choice(ALPHABETS));
 }
 
 const QUESTION_PATTERNS = [
@@ -99,13 +113,13 @@ const QUESTION_PATTERNS = [
   { question: ENC_ALPHABET, answer: ENC_TERNARY },
   { question: ENC_ALPHABET, answer: ENC_MORSE },
   { question: ENC_ALPHABET, answer: ENC_BRAILLE },
-  { question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
+  // { question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
   { question: ENC_INDEX, answer: ENC_ALPHABET },
   { question: ENC_BINARY, answer: ENC_ALPHABET },
   { question: ENC_TERNARY, answer: ENC_ALPHABET },
   { question: ENC_MORSE, answer: ENC_ALPHABET },
   { question: ENC_BRAILLE, answer: ENC_ALPHABET },
-  { question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
+  // { question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
 ];
 
 export function generateQuestion() {
@@ -115,6 +129,7 @@ export function generateQuestion() {
     questionType: qp.question.name,
     answerType: qp.answer.name,
     question: applyEncoding(word, qp.question),
+    initAnswer: qp.answer.empty.repeat(word.length),
     goldAnswer: applyEncoding(word, qp.answer),
     useKeyboard: qp.answer.useKeyboard,
   };

@@ -58,13 +58,16 @@ article {
   color: white;
   font-size: 0.6rem;
   font-weight: bold;
-  margin-top: 1rem;
+  margin: 1rem 0 .3rem;
   padding: 3px 8px;
   border-radius: 5px;
 }
 
 #question, #answer {
   font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /* ################################ */
@@ -82,4 +85,29 @@ footer button {
 .special-buttons button {
   height: 1.8rem;
   padding: 0 15px;
+}
+
+/* ################################ */
+/* braille */
+
+.braille-wrapper {
+  display: grid;
+  grid: 1.8rem 1.8rem 1.8rem / 1.8rem 1.8rem;
+  align-items: center;
+  justify-items: center;
+  margin: 0 .5rem;
+}
+
+.braille-wrapper > button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.braille-wrapper > button.off {
+  background: white;
+}
+
+.braille-wrapper > button.on {
+  background: #424242;
 }

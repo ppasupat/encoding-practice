@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { generateQuestion } from './utils';
+import { replaceAt, generateQuestion } from './utils';
 import Keyboard from './Keyboard';
+import Braille from './Braille';
 
 export default function App() {
   const [score, setScore] = useState(0);
   const [question, setQuestion] = useState(generateQuestion);
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState(question.initAnswer);
 
   function renderQuestion() {
     return (
@@ -16,6 +17,13 @@ export default function App() {
   }
 
   function renderAnswer() {
+    if (question.answerType === 'braille') {
+      return answer.split('').map((value, index) => (
+        <Braille key={index} value={value}
+          setValue={newValue => setAnswer(a => replaceAt(a, index, newValue))}
+        />
+      ));
+    }
     return (
       <>
         {answer}
@@ -38,8 +46,9 @@ export default function App() {
   function handleSubmit() {
     if (answer === question.goldAnswer) {
       setScore(s => s + 1);
-      setQuestion(generateQuestion());
-      setAnswer('');
+      const newQuestion = generateQuestion();
+      setQuestion(newQuestion);
+      setAnswer(newQuestion.initAnswer);
     } else {
       alert(`Wrong. (Correct answer: ${question.goldAnswer})`);
     }

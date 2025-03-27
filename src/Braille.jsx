@@ -1,5 +1,5 @@
 export default function Braille({ value, setValue }) {
-  const brailleDots = [1, 8, 2, 16, 4, 32].map(position => {
+  const toggleButtons = [1, 8, 2, 16, 4, 32].map(position => {
     const isOn = (value.codePointAt(0) - 0x2800) & position,
       valueIfToggled = String.fromCodePoint(
         value.codePointAt(0) + (isOn ? -position : position)
@@ -12,5 +12,5 @@ export default function Braille({ value, setValue }) {
       ></button>
     );
   });
-  return <div className="braille-wrapper">{brailleDots}</div>;
+  return <div className="braille-wrapper">{toggleButtons}</div>;
 }

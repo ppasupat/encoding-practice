@@ -82,7 +82,7 @@ const ENC_BRAILLE = {
 
 const ENC_SEMAPHORE = {
   name: 'semaphore',
-  mapping: {
+  mapping: Object.fromEntries(Object.entries({
     A: '01', B: '02', C: '03', D: '04', E: '05', F: '06', G: '07',
     H: '12', I: '13', K: '14', L: '15', M: '16', N: '17',
     O: '23', P: '24', Q: '25', R: '26', S: '27',
@@ -90,8 +90,8 @@ const ENC_SEMAPHORE = {
     /*num*/  J: '46', V: '47',
     W: '56', X: '57',
     Z: '67',
-  },
-  empty: '00',
+  }).map(([k, v]) => [k, String.fromCodePoint(64 + parseInt(v, 8))])),
+  empty: '@',  // 64 + 00
   sep: '',
   useKeyboard: false,
 }
@@ -108,17 +108,17 @@ function getRandomWord() {
 }
 
 const QUESTION_PATTERNS = [
-  { question: ENC_ALPHABET, answer: ENC_INDEX },
-  { question: ENC_ALPHABET, answer: ENC_BINARY },
-  { question: ENC_ALPHABET, answer: ENC_TERNARY },
-  { question: ENC_ALPHABET, answer: ENC_MORSE },
-  { question: ENC_ALPHABET, answer: ENC_BRAILLE },
-  // { question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
-  { question: ENC_INDEX, answer: ENC_ALPHABET },
-  { question: ENC_BINARY, answer: ENC_ALPHABET },
-  { question: ENC_TERNARY, answer: ENC_ALPHABET },
-  { question: ENC_MORSE, answer: ENC_ALPHABET },
-  { question: ENC_BRAILLE, answer: ENC_ALPHABET },
+  // { question: ENC_ALPHABET, answer: ENC_INDEX },
+  // { question: ENC_ALPHABET, answer: ENC_BINARY },
+  // { question: ENC_ALPHABET, answer: ENC_TERNARY },
+  // { question: ENC_ALPHABET, answer: ENC_MORSE },
+  // { question: ENC_ALPHABET, answer: ENC_BRAILLE },
+  { question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
+  // { question: ENC_INDEX, answer: ENC_ALPHABET },
+  // { question: ENC_BINARY, answer: ENC_ALPHABET },
+  // { question: ENC_TERNARY, answer: ENC_ALPHABET },
+  // { question: ENC_MORSE, answer: ENC_ALPHABET },
+  // { question: ENC_BRAILLE, answer: ENC_ALPHABET },
   // { question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
 ];
 

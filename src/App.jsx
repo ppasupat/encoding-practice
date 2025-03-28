@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FaBackspace } from "react-icons/fa";
 import { replaceAt, generateQuestion } from './utils';
 import Keyboard from './Keyboard';
 import Braille from './Braille';
@@ -93,12 +94,12 @@ export default function App() {
       </article>
       <footer>
         <Keyboard type={question.answerType} handleKey={handleKey} />
-        <div className="special-buttons">
-          {question.useKeyboard && <>
-            <button onClick={handleClear}>Clear</button>
-            <button onClick={handleBackspace}>Backspace</button>
-          </>}
+        <div id="special-buttons">
+          {question.useKeyboard &&
+          <button onClick={handleClear}>Clear</button>}
           <button onClick={handleSubmit}>Submit</button>
+          {question.useKeyboard &&
+          <button onClick={handleBackspace}><FaBackspace /></button>}
         </div>
       </footer>
     </>

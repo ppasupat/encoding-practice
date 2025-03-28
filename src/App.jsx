@@ -11,11 +11,17 @@ export default function App() {
   const [missed, setMissed] = useState(false);
 
   function renderStatic(encodedText, encodingType) {
-    return (
-      <>
-        {encodedText.length > 0 ? encodedText : '\xa0'}
-      </>
-    );
+    switch (encodingType) {
+      case 'semaphore':
+        return encodedText.split('').map((value, index) => (
+          <Semaphore key={index} value={value} />
+        ));
+      default:
+        if (!encodedText.length) return '\xa0';
+        return encodedText.split(/([|])/).map((value, index) => (
+          <span key={index} className={value === '|' ? 'sep' : ''}>{value}</span>
+        ));
+    }
   }
 
   function renderEditable(encodedText, encodingType, setEncodedText) {
@@ -33,11 +39,10 @@ export default function App() {
           />
         ));
       default:
-        return (
-          <>
-            {encodedText.length > 0 ? encodedText : '\xa0'}
-          </>
-        );
+        if (!encodedText.length) return '\xa0';
+        return encodedText.split(/([|])/).map((value, index) => (
+          <span key={index} className={value === '|' ? 'sep' : ''}>{value}</span>
+        ));
     }
   }
 
@@ -73,11 +78,15 @@ export default function App() {
       </header>
       <article>
         <div id="question-type">{question.questionType}</div>
-        <div id="question">{renderStatic(question.question, question.questionType)}</div>
+        <div id="question" className={question.questionType}>
+          {renderStatic(question.question, question.questionType)}
+        </div>
         <div id="answer-type">{question.answerType}</div>
-        <div id="answer">{renderEditable(answer, question.answerType, setAnswer)}</div>
+        <div id="answer" className={question.answerType}>
+          {renderEditable(answer, question.answerType, setAnswer)}
+        </div>
         {missed && (
-          <div id="gold-answer">
+          <div id="gold-answer" className={question.answerType}>
             {renderStatic(question.goldAnswer, question.answerType)}
           </div>
         )}

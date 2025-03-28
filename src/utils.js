@@ -104,22 +104,27 @@ function applyEncoding(word, encoding) {
 // Generate random question
 
 function getRandomWord() {
-  return Array(3).fill(0).map(() => choice(ALPHABETS));
+  let remaining = ALPHABETS.slice();
+  for (let i = 0; i < 3; i++) {
+    let j = Math.floor(Math.random() * (remaining.length - i));
+    [remaining[i], remaining[i + j]] = [remaining[i + j], remaining[i]];
+  }
+  return remaining.slice(0, 3);
 }
 
 const QUESTION_PATTERNS = [
-  // { question: ENC_ALPHABET, answer: ENC_INDEX },
-  // { question: ENC_ALPHABET, answer: ENC_BINARY },
-  // { question: ENC_ALPHABET, answer: ENC_TERNARY },
-  // { question: ENC_ALPHABET, answer: ENC_MORSE },
-  // { question: ENC_ALPHABET, answer: ENC_BRAILLE },
+  { question: ENC_ALPHABET, answer: ENC_INDEX },
+  { question: ENC_ALPHABET, answer: ENC_BINARY },
+  { question: ENC_ALPHABET, answer: ENC_TERNARY },
+  { question: ENC_ALPHABET, answer: ENC_MORSE },
+  { question: ENC_ALPHABET, answer: ENC_BRAILLE },
   { question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
-  // { question: ENC_INDEX, answer: ENC_ALPHABET },
-  // { question: ENC_BINARY, answer: ENC_ALPHABET },
-  // { question: ENC_TERNARY, answer: ENC_ALPHABET },
-  // { question: ENC_MORSE, answer: ENC_ALPHABET },
-  // { question: ENC_BRAILLE, answer: ENC_ALPHABET },
-  // { question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
+  { question: ENC_INDEX, answer: ENC_ALPHABET },
+  { question: ENC_BINARY, answer: ENC_ALPHABET },
+  { question: ENC_TERNARY, answer: ENC_ALPHABET },
+  { question: ENC_MORSE, answer: ENC_ALPHABET },
+  { question: ENC_BRAILLE, answer: ENC_ALPHABET },
+  { question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
 ];
 
 export function generateQuestion() {

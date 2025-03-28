@@ -14,7 +14,7 @@ export default function Keyboard({ type, handleKey }) {
     </button>
   ));
   return (
-    <div className="keyboard">
+    <div className={`keyboard ${type}`}>
       {keyboardElements}
     </div>
   );

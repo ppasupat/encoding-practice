@@ -13,18 +13,18 @@ export default function Semaphore({ value, setValue = null }) {
       leftHandFlip = [0,1,2,3,4].includes(leftHandPos),
       rightHandFlip = [1,2,3].includes(rightHandPos);
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130">
-        <g transform="translate(65, 50)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="130" height="120">
+        <g transform="translate(65, 45)">
           <circle cx="0" cy="0" r="6" className="person" />
           <rect x="-7" y="8" width="14" height="32" rx="5" className="person" />
         </g>
-        <g transform={`translate(54, 62) rotate(${45 * leftHandPos}) scale(${leftHandFlip ? 1 : -1},1)`}>
+        <g transform={`translate(54, 57) rotate(${45 * leftHandPos}) scale(${leftHandFlip ? 1 : -1},1)`}>
           <polygon points="1,55 1,35 21,55" fill="red" />
           <polygon points="21,35 1,35 21,55" fill="gold" />
           <rect x="-1" y="0" width="2" height="55" />
           <rect x="-2.5" y="-2.5" width="5" height="20" rx="2" className="person" />
         </g>
-        <g transform={`translate(76, 62) rotate(${45 * rightHandPos}) scale(${rightHandFlip ? 1 : -1},1)`}>
+        <g transform={`translate(76, 57) rotate(${45 * rightHandPos}) scale(${rightHandFlip ? 1 : -1},1)`}>
           <polygon points="1,55 1,35 21,55" fill="red" />
           <polygon points="21,35 1,35 21,55" fill="gold" />
           <rect x="-1" y="0" width="2" height="55" />

@@ -45,7 +45,7 @@ body {
   justify-content: center;
   text-align: center;
   background: white;
-  padding: 15px;
+  padding: 15px 5px;
 }
 
 article {
@@ -117,18 +117,18 @@ footer button:active {
 }
 
 .keyboard button {
-  width: 2.3rem;
-  height: 2.3rem;
+  width: 75px;
+  height: 80px;
 }
 
 .keyboard.alphabet button {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 50px;
+  height: 65px;
 }
 
 #special-buttons button {
-  width: 150px;
-  height: 1.8rem;
+  width: 155px;
+  height: 80px;
   padding: 0 15px;
 }
 
@@ -167,7 +167,7 @@ footer button:active {
 .semaphore-wrapper {
   position: relative;
   width: 130px;
-  height: 130px;
+  height: 120px;
   margin: 0 10px;
 }
 

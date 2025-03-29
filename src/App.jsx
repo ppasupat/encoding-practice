@@ -11,6 +11,13 @@ export default function App() {
   const [answer, setAnswer] = useState(question.initAnswer);
   const [missed, setMissed] = useState(false);
 
+  function nextQuestion() {
+    const newQuestion = generateQuestion();
+    setQuestion(newQuestion);
+    setAnswer(newQuestion.initAnswer);
+    setMissed(false);
+  }
+
   function renderStatic(encodedText, encodingType) {
     switch (encodingType) {
       case 'semaphore':
@@ -30,13 +37,15 @@ export default function App() {
       case 'braille':
         return encodedText.split('').map((value, index) => (
           <Braille key={index} value={value}
-            setValue={newValue => setEncodedText(a => replaceAt(a, index, newValue))}
+            setValue={setEncodedText === null ? null :
+            newValue => setEncodedText(a => replaceAt(a, index, newValue))}
           />
         ));
       case 'semaphore':
         return encodedText.split('').map((value, index) => (
           <Semaphore key={index} value={value}
-            setValue={newValue => setEncodedText(a => replaceAt(a, index, newValue))}
+            setValue={setEncodedText === null ? null :
+            newValue => setEncodedText(a => replaceAt(a, index, newValue))}
           />
         ));
       default:
@@ -62,10 +71,7 @@ export default function App() {
   function handleSubmit() {
     if (answer === question.goldAnswer) {
       setScore(s => ({right: s.right + !missed, wrong: s.wrong}));
-      setMissed(false);
-      const newQuestion = generateQuestion();
-      setQuestion(newQuestion);
-      setAnswer(newQuestion.initAnswer);
+      nextQuestion();
     } else {
       setScore(s => ({right: s.right, wrong: s.wrong + !missed}));
       setMissed(true);
@@ -84,7 +90,7 @@ export default function App() {
         </div>
         <div id="answer-type">{question.answerType}</div>
         <div id="answer" className={question.answerType}>
-          {renderEditable(answer, question.answerType, setAnswer)}
+          {renderEditable(answer, question.answerType, missed ? null : setAnswer)}
         </div>
         {missed && (
           <div id="gold-answer" className={question.answerType}>
@@ -93,12 +99,15 @@ export default function App() {
         )}
       </article>
       <footer>
-        <Keyboard type={question.answerType} handleKey={handleKey} />
+        {!missed &&
+        <Keyboard type={question.answerType} handleKey={handleKey} />}
         <div id="special-buttons">
-          {question.useKeyboard &&
+          {question.useKeyboard && !missed &&
           <button onClick={handleClear}>Clear</button>}
-          <button onClick={handleSubmit}>Submit</button>
-          {question.useKeyboard &&
+          {missed ?
+            <button onClick={nextQuestion}>OK</button> :
+            <button onClick={handleSubmit}>Submit</button>}
+          {question.useKeyboard && !missed &&
           <button onClick={handleBackspace}><FaBackspace /></button>}
         </div>
       </footer>

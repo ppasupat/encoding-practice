@@ -1,4 +1,4 @@
-export default function Braille({ value, setValue }) {
+export default function Braille({ value, setValue = null }) {
   const toggleButtons = [1, 8, 2, 16, 4, 32].map(position => {
     const isOn = (value.codePointAt(0) - 0x2800) & position,
       valueIfToggled = String.fromCodePoint(
@@ -8,7 +8,7 @@ export default function Braille({ value, setValue }) {
       <button
         key={position}
         className={isOn ? 'on' : 'off'}
-        onClick={() => setValue(valueIfToggled)}
+        onClick={setValue === null ? null : () => setValue(valueIfToggled)}
       ></button>
     );
   });

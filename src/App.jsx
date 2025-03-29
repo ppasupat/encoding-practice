@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FaBackspace } from "react-icons/fa";
 import { replaceAt, generateQuestion } from './utils';
 import Keyboard from './Keyboard';
 import Braille from './Braille';
@@ -37,14 +36,14 @@ export default function App() {
       case 'braille':
         return encodedText.split('').map((value, index) => (
           <Braille key={index} value={value}
-            setValue={setEncodedText === null ? null :
+            setValue={!setEncodedText ? null :
             newValue => setEncodedText(a => replaceAt(a, index, newValue))}
           />
         ));
       case 'semaphore':
         return encodedText.split('').map((value, index) => (
           <Semaphore key={index} value={value}
-            setValue={setEncodedText === null ? null :
+            setValue={!setEncodedText ? null :
             newValue => setEncodedText(a => replaceAt(a, index, newValue))}
           />
         ));
@@ -57,15 +56,15 @@ export default function App() {
   }
 
   function handleKey(key) {
-    setAnswer(a => a + key);
+    if (key === '\b') {
+      setAnswer(a => a.slice(0, -1));
+    } else {
+      setAnswer(a => a + key);
+    }
   }
 
   function handleClear() {
-    setAnswer('');
-  }
-
-  function handleBackspace() {
-    setAnswer(a => a.slice(0, -1));
+    setAnswer(question.initAnswer);
   }
 
   function handleSubmit() {
@@ -102,13 +101,10 @@ export default function App() {
         {!missed &&
         <Keyboard type={question.answerType} handleKey={handleKey} />}
         <div id="special-buttons">
-          {question.useKeyboard && !missed &&
-          <button onClick={handleClear}>Clear</button>}
+          <button disabled={missed} onClick={handleClear}>Clear</button>
           {missed ?
             <button onClick={nextQuestion}>OK</button> :
             <button onClick={handleSubmit}>Submit</button>}
-          {question.useKeyboard && !missed &&
-          <button onClick={handleBackspace}><FaBackspace /></button>}
         </div>
       </footer>
     </>

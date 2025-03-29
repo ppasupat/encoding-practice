@@ -1,3 +1,5 @@
+import { FaBackspace } from "react-icons/fa";
+
 const TYPE_KEYS = {
   'alphabet': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   'index': '0123456789|',
@@ -16,6 +18,7 @@ export default function Keyboard({ type, handleKey }) {
   return (
     <div className={`keyboard ${type}`}>
       {keyboardElements}
+      <button onClick={() => handleKey('\b')}><FaBackspace /></button>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function Braille({ value, setValue = null }) {
       <button
         key={position}
         className={isOn ? 'on' : 'off'}
-        onClick={setValue === null ? null : () => setValue(valueIfToggled)}
+        onClick={!setValue ? null : () => setValue(valueIfToggled)}
       ></button>
     );
   });

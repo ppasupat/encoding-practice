@@ -129,8 +129,7 @@ const QUESTION_PATTERNS = [
 
 export function generateQuestion() {
   const word = getRandomWord();
-  // let qp = choice(QUESTION_PATTERNS);
-  const qp = QUESTION_PATTERNS[11];
+  let qp = choice(QUESTION_PATTERNS);
   return {
     questionType: qp.question.name,
     answerType: qp.answer.name,

@@ -5,6 +5,18 @@ export function choice(stuff) {
   return stuff[Math.floor(Math.random() * stuff.length)];
 }
 
+// Each stuff entry should be (object, weight).
+// O(n) is fine for small n.
+export function weightedChoice(stuff) {
+  const totalWeight = stuff.reduce((acc, x) => acc + x[1], 0);
+  let sample = Math.random() * totalWeight, i = 0;
+  while (sample > stuff[i][1]) {
+    sample -= stuff[i][1];
+    i++;
+  }
+  return stuff[i][0];
+}
+
 export function replaceAt(string, index, newChar) {
   return string.slice(0, index) + newChar + string.slice(index + 1);
 }

@@ -125,23 +125,29 @@ function getRandomWord() {
 }
 
 const QUESTION_PATTERNS = [
-  { question: ENC_ALPHABET, answer: ENC_INDEX },
-  { question: ENC_ALPHABET, answer: ENC_BINARY },
-  { question: ENC_ALPHABET, answer: ENC_TERNARY },
-  { question: ENC_ALPHABET, answer: ENC_MORSE },
-  { question: ENC_ALPHABET, answer: ENC_BRAILLE },
-  { question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
-  { question: ENC_INDEX, answer: ENC_ALPHABET },
-  { question: ENC_BINARY, answer: ENC_ALPHABET },
-  { question: ENC_TERNARY, answer: ENC_ALPHABET },
-  { question: ENC_MORSE, answer: ENC_ALPHABET },
-  { question: ENC_BRAILLE, answer: ENC_ALPHABET },
-  { question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
+  { name: 'alphabet -> index', question: ENC_ALPHABET, answer: ENC_INDEX },
+  { name: 'alphabet -> binary', question: ENC_ALPHABET, answer: ENC_BINARY },
+  { name: 'alphabet -> ternary', question: ENC_ALPHABET, answer: ENC_TERNARY },
+  { name: 'alphabet -> morse', question: ENC_ALPHABET, answer: ENC_MORSE },
+  { name: 'alphabet -> braille', question: ENC_ALPHABET, answer: ENC_BRAILLE },
+  { name: 'alphabet -> semaphore', question: ENC_ALPHABET, answer: ENC_SEMAPHORE },
+  { name: 'index -> alphabet', question: ENC_INDEX, answer: ENC_ALPHABET },
+  { name: 'binary -> alphabet', question: ENC_BINARY, answer: ENC_ALPHABET },
+  { name: 'ternary -> alphabet', question: ENC_TERNARY, answer: ENC_ALPHABET },
+  { name: 'morse -> alphabet', question: ENC_MORSE, answer: ENC_ALPHABET },
+  { name: 'braille -> alphabet', question: ENC_BRAILLE, answer: ENC_ALPHABET },
+  { name: 'semaphore -> alphabet', question: ENC_SEMAPHORE, answer: ENC_ALPHABET },
 ];
 
-export function generateQuestion() {
+export function getQuestionPatterns() {
+  return QUESTION_PATTERNS.map(x => x.name);
+}
+
+export function generateQuestion(questionPatternWeights) {
   const word = getRandomWord();
-  let qp = choice(QUESTION_PATTERNS);
+  let qp = weightedChoice(QUESTION_PATTERNS.map(
+    x => [x, questionPatternWeights[x.name] ?? 1]
+  ));
   return {
     questionType: qp.question.name,
     answerType: qp.answer.name,

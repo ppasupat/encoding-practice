@@ -4,17 +4,21 @@ import Keyboard from './Keyboard';
 import Braille from './Braille';
 import Semaphore from './Semaphore';
 
-export default function Quiz() {
-  const [score, setScore] = useState({right: 0, wrong: 0});
-  const [question, setQuestion] = useState(generateQuestion);
-  const [answer, setAnswer] = useState(question.initAnswer);
+export default function Quiz({ score, setScore, questionPatternWeights }) {
+  const [question, setQuestion] = useState(null);
+  const [answer, setAnswer] = useState(null);
   const [missed, setMissed] = useState(false);
 
   function nextQuestion() {
-    const newQuestion = generateQuestion();
+    console.log('nextQuestion');
+    const newQuestion = generateQuestion(questionPatternWeights);
     setQuestion(newQuestion);
     setAnswer(newQuestion.initAnswer);
     setMissed(false);
+  }
+  if (question === null) {
+    nextQuestion();
+    return null;
   }
 
   function renderStatic(encodedText, encodingType) {
